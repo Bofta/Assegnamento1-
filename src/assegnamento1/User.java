@@ -1,11 +1,96 @@
 package assegnamento1;
 
-class User extends Person {
-    public User(String name, String surname, String username, String password) {
-        super(name, surname, username, password);
-    }
 
-    public void signUp(Shop shop) {
+import java.util.ArrayList;
+import java.util.HashMap;
 
+    /**
+     * User is a simple user that can buy products from the shop.
+     */
+    public class User extends Person{
+
+        /**
+         * This constructor generates an empty user
+         */
+        public User () {
+        }
+        /**
+         * This constructor generates a user from its username and password
+         *
+         * @param username
+         * @param password
+         *
+         */
+        public User (String username, String password ) {
+            super(username, password);
+        }
+        /**
+         * This constructor generates a user from a generic person
+         *
+         * @param user
+         */
+        public User(Person user){
+            super(user.getUsername(), user.getPassword());
+        }
+
+        /**
+         * This method notifies the user of a newly arrived product. In real life, it could send an email.
+         */
+        public void notifyProductAdded () {
+            System.out.println("Un prodotto richiesto da "+ this.getUsername() + " e' stato aggiunto.");
+        }
+
+        /**
+         * This method orders a Product from the Shop.
+         *
+         * @param wantedProduct
+         * @param shop
+         * @param Code
+         * @param quantity
+         */
+        public void orderProduct (final Product wantedProduct, final Shop shop, final Integer Code, final Integer quantity){
+            shop.orderProduct(this, wantedProduct, Code , quantity);
+        }
+        /**
+         * This method returns the user's orders
+         *
+         * @param  shop
+         * @return the orders
+         */
+        public ArrayList<Order> getMyOrders (final Shop shop) {
+            return shop.getOrdersForUser(this);
+        }
+        /**
+         * This method returns a product from the shop
+         *
+         * @param name
+         * @param shop
+         * @return the product and its quantities
+         */
+        public HashMap<Product,InventoryItem> getProductByName (String name, Shop shop) {
+            return shop.findProdcutsName(this, name);
+        }
+        /**
+         * This method returns product by year.
+         *
+         * @param year
+         * @param shop
+         * @return the products and their quantities
+         */
+        public HashMap<Shop,InventoryItem> getWinesByYear (Integer year, Shop shop) {
+            return shop.findProductsYear(this, year);
+        }
+
+        /*
+         * This method adds a product to the list of request
+         *
+         * @param requestedProduct
+         * @param shop
+         */
+        public void requestProduct (String requestedProduct, Shop shop) {
+            shop.requestProduct(this, requestedProduct);
         }
     }
+
+
+

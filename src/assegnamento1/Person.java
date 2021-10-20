@@ -7,7 +7,7 @@ public class Person {
     String password;
 
     public Person() {
-
+        System.out.println("Person created with success !");
     }
 
     public Person(String name, String surname, String username, String password) {
@@ -15,6 +15,9 @@ public class Person {
         this.setSurname(surname);
         this.setUsername(username);
         this.setPassword((password));
+    }
+
+    public Person(String username, String password) {
     }
 
     public String getName() {
@@ -52,6 +55,21 @@ public class Person {
     public void changePassword(final String newPassword) {
         this.password = newPassword;
         System.out.println("Password changed with success!");
+    }
+
+    /**
+     * This method checks if the password is correct for the user.
+     *
+     * @param password
+     * @return true if the login is ok
+     */
+    public boolean checkLogin (String password) {
+        if (password.equals(this.password)){
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }
 
