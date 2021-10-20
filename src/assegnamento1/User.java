@@ -2,7 +2,6 @@ package assegnamento1;
 
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
     /**
      * User is a simple user that can buy products from the shop.
@@ -60,26 +59,8 @@ import java.util.HashMap;
         public ArrayList<Order> getMyOrders (final Shop shop) {
             return shop.getOrdersForUser(this);
         }
-        /**
-         * This method returns a product from the shop
-         *
-         * @param name
-         * @param shop
-         * @return the product and its quantities
-         */
-        public HashMap<Product,InventoryItem> getProductByName (String name, Shop shop) {
-            return shop.findProdcutsName(this, name);
-        }
-        /**
-         * This method returns product by year.
-         *
-         * @param year
-         * @param shop
-         * @return the products and their quantities
-         */
-        public HashMap<Shop,InventoryItem> getWinesByYear (Integer year, Shop shop) {
-            return shop.findProductsYear(this, year);
-        }
+
+
 
         /*
          * This method adds a product to the list of request

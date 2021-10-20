@@ -42,7 +42,7 @@ public class UserDash extends Dash{
                     this.searchProductByName();
                     break;
                 case 2:
-                    this.searchProductByYear();
+                    System.out.println("Second case box ");
                     break;
                 case 3:
                     this.printAllProducts();
@@ -82,7 +82,7 @@ public class UserDash extends Dash{
                     return;
                 }
                 if (input.equals("Y"))
-                    this.orderWine(productEntry.getKey());
+                    this.orderProduct(productEntry.getKey());
             }
         }
     }
@@ -106,7 +106,7 @@ public class UserDash extends Dash{
      *
      * @param product
      */
-    private void orderProduct(Shop product){
+    private void orderProduct(Product product){
         System.out.print("Year: ");
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String input = "";
@@ -143,12 +143,12 @@ public class UserDash extends Dash{
             return;
         }
         ArrayList<Product> foundProductsArray = new ArrayList();
-        HashMap<Product,InventoryItem> foundProducts = this.shop.findWinesYear(new User(this.loggedIn), Integer.valueOf(input));
+        HashMap<Product,InventoryItem> foundProducts = this.shop.findProductsName(new User(this.loggedIn), String.valueOf(input));
         if (foundProducts == null) {
             System.out.println("Wine not found. Sorry.");
         } else {
             System.out.println("Found! ");
-            for (Map.Entry<Shop,InventoryItem> foundProduct : foundProducts.entrySet()){
+            for (Map.Entry<Product, InventoryItem> foundProduct : foundProducts.entrySet()){
                 System.out.println(foundProduct.getKey().toString());
                 System.out.println(foundProduct.getValue().toString());
                 foundProductsArray.add(foundProduct.getKey());
@@ -176,6 +176,6 @@ public class UserDash extends Dash{
      * This method prints all the wines
      */
     public void printAllProducts() {
-        System.out.println(this.shop.stringAllWines());
+        System.out.println(this.shop.stringAllProducts());
     }
 }

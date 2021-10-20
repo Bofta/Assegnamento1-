@@ -1,6 +1,5 @@
 package assegnamento1;
 
-
 import java.util.*;
 
 public class Shop {
@@ -91,7 +90,7 @@ public class Shop {
      *
      * @param requestedProducts
      */
-    public void setRequestedWines(ArrayList<Request> requestedProducts) {
+    public void setRequestedProducts(ArrayList<Request> requestedProducts) {
         Collections.copy(this.requestedProducts, requestedProducts);
     }
 
@@ -189,7 +188,7 @@ public class Shop {
         if (!(this.users.contains(authorizer)||this.employees.contains(authorizer))) {
             return null;
         }
-        HashMap<Shop,InventoryItem> searched = new HashMap<Shop,InventoryItem>();
+        HashMap<Product, InventoryItem> searched = new HashMap<>();
         for(Map.Entry<Product,InventoryItem> temp : this.products.entrySet()) {
             if(toSearch.equals(temp.getKey().getName())) {
                 searched.put(temp.getKey(), temp.getValue());
@@ -198,24 +197,106 @@ public class Shop {
         return searched;
     }
 
-    /**
-     * This method looks for products in the DB by their code
-     *
-     * @param authorizer
-     * @param toSearch
-     * @return the results
-     */
-    public HashMap<Product,InventoryItem> findWinesYear(User authorizer, Integer toSearch){
-        if(!this.users.contains(authorizer)) {
-            return null;
+
+
+
+
+    public void addProduct(Employee authorizer, Product toAdd, Integer code_Product , Integer quantity) {
+        //guardo se authorizer è un employee
+        if(!this.employees.contains(authorizer)) {
+            return;
         }
-        HashMap<Product,InventoryItem> searched = new HashMap<Product,InventoryItem>();
-        for(Map.Entry<Product,InventoryItem> temp : this.products.entrySet()) {
-            if(temp.getValue().getQuantityForYear(toSearch)>0) {
-                searched.put(temp.getKey(),temp.getValue());
+        // We can't use a foreach loop to remove elements, so let's use an iterator instead
+        Iterator<Request> it = this.requestedProducts.iterator();
+        while(it.hasNext()){
+            Request temp = it.next();
+            if (temp.checkIfRequested(toAdd.getName())){
+                it.remove();
             }
         }
-        return null;
+
+        System.out.println("Prodotto aggiunto con successo: " + toAdd.getName() + " del " + code_Product);
+    }
+
+
+
+    /**
+     * This method orders a new product
+     *
+     * @param orderer
+     * @param wantedProduct
+     * @param code_Product
+     * @param quantity
+     */
+
+
+    /**
+     * This method ships the ordered products
+     *
+     * @param authorizer
+     */
+
+
+
+    /**
+     * This method returns the orders a user has made
+     *
+     * @param requester
+     * @return the orders
+     */
+
+
+    /**
+     * This method returns all the shop data in a string
+     *
+     * @param loggedIn
+     * @return the resulting string
+     */
+    public String getShopData(Person loggedIn) {
+        //verifico authorizer
+        if(!this.employees.contains(loggedIn)) {
+            return "";
+        }
+        String returnedString;
+        returnedString = "Shop: "+this.getName()+"\n";
+        returnedString += "\nUSERS:\n";
+        for (User printingUser: this.getUsers()) {
+            returnedString += printingUser.toString();
+        }
+        returnedString += "\nEMPLOYEES::\n";
+        for (Employee printingAdmin: this.getemployees()) {
+            returnedString += printingAdmin.toString();
+        }
+
+        returnedString += "\nORDERS:\n";
+        for (Order printingOrder: this.getOrders()) {
+            returnedString += printingOrder.toString();
+        }
+        return returnedString;
+    }
+
+    /**
+     * This method adds a new single wine to the database
+     *
+     * @param authorizer
+     * @param toAdd
+     * @param code_Product
+     */
+    public void addProduct(Employee authorizer, Product toAdd, Integer code_Product) {
+        //guardo se authorizer è un seller
+        if(!this.employees.contains(authorizer)) {
+            return;
+        }
+
+        else {
+            this.products.put(toAdd,new InventoryItem(code_Product,Integer.valueOf(1)));
+        }
+        for (Request temp: this.requestedProducts) {
+            if (temp.checkIfRequested(toAdd.getName())){
+                this.requestedProducts.remove(temp);
+            }
+        }
+        System.out.println("Prodotto aggiunto con successo: " + toAdd.getName() + " del " + code_Product);
     }
 
     /**
@@ -225,11 +306,10 @@ public class Shop {
      */
     public String stringAllProducts () {
         String returnedString = "";
-        returnedString += "WINES:\n";
-        for (Map.Entry<Product, InventoryItem> productItem: this.getProducts().entrySet()) {
+        returnedString += "PRODUCTS:\n";
+        for (Map.Entry<Product, InventoryItem> productItem: this.getWines().entrySet()) {
             returnedString += productItem.getKey().toString() + "\n" + productItem.getValue().toString();
         }
         return returnedString;
     }
-
 }
