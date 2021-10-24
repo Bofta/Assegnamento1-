@@ -1,9 +1,13 @@
+/**
+ * @author Montasser Rajeb - Omar Stringhini
+ */
+
 package assegnamento1;
 
-/**
- * Request is made from a user when he wants a specific product.*
- */
-public class Request {
+    /**
+     * Request is made from a user when he wants a specific product.
+     */
+    public class Request {
     private User requester;
     private String productName;
 

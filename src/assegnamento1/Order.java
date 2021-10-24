@@ -26,9 +26,9 @@ public class Order {
      * @param wantedProduct
      * @param code
      * @param quantity
-     * @param b
+     * @param shipped
      */
-    public Order(User orderer, Product wantedProduct, Integer code, Integer quantity, boolean b)
+    public Order(User orderer, Product wantedProduct, Integer code, Integer quantity, boolean shipped)
     {
         this.orderer = new User ();
         this.orderedProduct = new Product();
@@ -134,8 +134,10 @@ public class Order {
     public BooleanProperty shippedProperty (){
         return this.shipped;
     }
+
     /**
      * This method generates a string describing the order
+     * @return
      */
     @Override
     public String toString() {

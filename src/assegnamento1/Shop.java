@@ -1,3 +1,8 @@
+/**
+ * @author Montasser Rajeb - Omar Stringhini
+ */
+
+
 package assegnamento1;
 
 import java.util.*;
@@ -19,6 +24,14 @@ public class Shop {
         this.orders= new ArrayList<Order>();
         this.requestedProducts= new ArrayList<Request>();
 
+    }
+
+    public Shop(final HashMap<assegnamento1.Product,assegnamento1.InventoryItem> products, final ArrayList<Employee> employees, final ArrayList<User> users){
+        this.products = new HashMap<assegnamento1.Product, assegnamento1.InventoryItem>();
+        this.employees = new ArrayList<Employee>(employees);
+        this.users = new ArrayList<User> (users);
+        this.orders= new ArrayList<Order>();
+        this.requestedProducts= new ArrayList<Request>();
     }
 
 
@@ -253,7 +266,7 @@ public class Shop {
      * @return the resulting string
      */
     public String getShopData(Person loggedIn) {
-        //verifico authorizer
+        //verify authorizer
         if(!this.employees.contains(loggedIn)) {
             return "";
         }

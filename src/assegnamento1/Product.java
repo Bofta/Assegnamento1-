@@ -1,3 +1,9 @@
+
+/**
+ * @author Montasser Rajeb - Omar Stringhini
+ */
+
+
 package assegnamento1;
 
 
@@ -8,8 +14,8 @@ public class Product {
 
     private String name_Product;
     private String producer_Product;
-    private String code_Product;
-    private float price_Product;
+    private Integer code_Product;
+    private double price_Product;
 
     /**
      * This constructor generates an empty Product object
@@ -17,7 +23,7 @@ public class Product {
     public Product() {
         this.name_Product = "";
         this.producer_Product = "";
-        this.code_Product = "";
+        this.code_Product = 0;
         this.price_Product = 0;
     }
 
@@ -29,7 +35,7 @@ public class Product {
      * @param code_Product
      * @param price_Product
      */
-    public Product(final String name_Product, final String producer_Product, final String code_Product , final int price_Product) {
+    public Product(final String name_Product, final String producer_Product, final Integer code_Product , final double price_Product) {
         this.name_Product = name_Product;
         this.producer_Product = producer_Product;
         this.code_Product = code_Product;
@@ -48,7 +54,7 @@ public class Product {
     /**
      * This method sets the product name
      *
-     * @param name
+     * @param name_Product
      */
     public void setName(final String name_Product) {
         this.name_Product = name_Product;
@@ -77,7 +83,7 @@ public class Product {
      *
      * @return the product
      */
-    public String getCode_Product() {
+    public Integer getCode_Product() {
         return this.code_Product;
     }
 
@@ -86,7 +92,7 @@ public class Product {
      *
      * @param code_Product
      */
-    public void setCode_Product(final String code_Product) {
+    public void setCode_Product(final Integer code_Product) {
         this.code_Product = code_Product;
     }
 

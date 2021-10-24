@@ -1,3 +1,7 @@
+/**
+ * @author Montasser Rajeb - Omar Stringhini
+ */
+
 package assegnamento1;
 
 import java.util.HashMap;
@@ -21,7 +25,7 @@ public class InventoryItem {
     /**
      * This constructor generates an inventory item with just a code possessed.
      *
-     * @param year
+     * @param code_Product
      * @param quantity
      */
     public InventoryItem(Integer code_Product, Integer quantity) {
