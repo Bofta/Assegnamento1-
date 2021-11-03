@@ -5,8 +5,8 @@
 package assegnamento1;
 
 /**
+ * @author Montasser Ben Rejeb - Omar Stringhini
  * Person describes a generic user. It is the parent class of User and Employee.
- * In the future, plain saving of the password should be avoided.
  */
 
 public class Person {

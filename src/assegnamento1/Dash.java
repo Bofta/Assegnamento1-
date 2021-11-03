@@ -1,6 +1,7 @@
 package assegnamento1;
 
     /**
+     * @author Montasser Ben Rejeb - Omar Stringhini
      * This class describes a generic dashboard.
      */
 

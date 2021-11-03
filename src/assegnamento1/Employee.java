@@ -34,15 +34,25 @@ public class Employee extends Person{
     }
 
 
-
     /**
-     * This method adds a single product to the shop.
+     * This method ships the ordered products.
      *
-     * @param newProduct
-     * @param code_Product
      * @param shop
      */
-    public void addProducts(Product newProduct, Integer code_Product, Shop shop) {
-        shop.addProduct(this, newProduct, code_Product);
+    public void shipOrders (Shop shop) {
+        shop.shipProducts(this);
     }
+    /**
+     * This method adds a new product to the shop with an arbitrary quantity.
+     *
+     * @param newProduct
+     * @param quantity
+     * @param shop
+     */
+    public void addProducts(Product newProduct, Integer quantity, Shop shop) {
+        shop.addProduct(newProduct, quantity);
+    }
+
+
+
 }

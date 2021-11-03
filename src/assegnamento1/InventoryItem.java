@@ -1,5 +1,5 @@
 /**
- * @author Montasser Rajeb - Omar Stringhini
+ * @author Montasser Ben Rejeb - Omar Stringhini
  */
 
 package assegnamento1;
@@ -13,12 +13,16 @@ import java.util.Map;
  */
 public class InventoryItem {
 
-    private HashMap<Integer,Integer> code_Product;
+    public HashMap<Integer,Integer> code_Product;
+
+
 
     /**
      * This constructor generates an empty inventory.
+     * @param name_Product
+     * @param quantity
      */
-    public InventoryItem() {
+    public InventoryItem(String name_Product, Integer quantity) {
         this.code_Product = new HashMap<Integer,Integer>();
     }
 
@@ -51,6 +55,25 @@ public class InventoryItem {
      */
     public Integer getQuantityForcode_Product(final Integer code_Product) {
         return this.code_Product.get(code_Product);
+    }
+
+    /**
+     * This method adds/removes a quantity from the inventory.
+     *
+     * @param quantity
+     * @param toSum
+     *
+     * @return whether the sum was ok
+     */
+    public boolean sumQuantity(Integer quantity, Integer toSum) {
+        if (! this.code_Product.containsKey(quantity)) {
+            this.code_Product.put(quantity, 0);
+        }
+        if((this.code_Product.get(quantity)+toSum)<0) {
+            return false;
+        }
+        this.code_Product.put(quantity, toSum + this.code_Product.get(quantity));
+        return true;
     }
 
     /**

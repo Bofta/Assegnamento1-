@@ -62,7 +62,6 @@ public class Login {
             System.out.println("Attenzione! Username o password non corrette, riprovare.\n");
             loginPage(shop);
         }
-
-
     }
 }
+

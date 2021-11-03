@@ -8,6 +8,7 @@ package assegnamento1;
 import java.util.ArrayList;
 
     /**
+     * @author Montasser Ben Rejeb - Omar Stringhini
      * User is a simple user that can buy products from the shop.
      */
     public class User extends Person{
@@ -40,7 +41,8 @@ import java.util.ArrayList;
          * This method notifies the user of a newly arrived product. In real life, it could send an email.
          */
         public void notifyProductAdded () {
-            System.out.println("Un prodotto richiesto da "+ this.getUsername() + " e' stato aggiunto.");
+            System.out.println("Il prodotto  richiesto da "+ this.getUsername() + " e' stato aggiunto.");
+                return;
         }
 
         /**
@@ -74,6 +76,7 @@ import java.util.ArrayList;
          */
         public void requestProduct (String requestedProduct, Shop shop) {
             shop.requestProduct(this, requestedProduct);
+            return;
         }
     }
 

@@ -1,5 +1,5 @@
 /**
- * @author Montasser Rajeb - Omar Stringhini
+ * @author Montasser Ben Rejeb - Omar Stringhini
  */
 
 
@@ -9,16 +9,16 @@ import java.util.*;
 
 public class Shop {
 
-    private String name;
-    private HashMap<assegnamento1.Product, assegnamento1.InventoryItem> products;
-    private ArrayList<Employee> employees;
-    private ArrayList<User> users;
-    private ArrayList<Order> orders;
-    private ArrayList<Request> requestedProducts;
+    public String name;
+    public HashMap<String, Integer> products;
+    public ArrayList<Employee> employees;
+    public ArrayList<User> users;
+    public ArrayList<Order> orders;
+    public ArrayList<Request> requestedProducts;
 
-    public Shop() {
-        this.name = "";
-        this.products = new HashMap<assegnamento1.Product, assegnamento1.InventoryItem>();
+    public Shop(String s) {
+        this.name = s;
+        this.products = new HashMap<String, Integer>();
         this.employees = new ArrayList<Employee>();
         this.users = new ArrayList<User>();
         this.orders= new ArrayList<Order>();
@@ -26,12 +26,16 @@ public class Shop {
 
     }
 
-    public Shop(final HashMap<assegnamento1.Product,assegnamento1.InventoryItem> products, final ArrayList<Employee> employees, final ArrayList<User> users){
-        this.products = new HashMap<assegnamento1.Product, assegnamento1.InventoryItem>();
+    public Shop(final HashMap<Product, InventoryItem> products, final ArrayList<Employee> employees, final ArrayList<User> users){
+        this.products = new HashMap<String, Integer>();
         this.employees = new ArrayList<Employee>(employees);
         this.users = new ArrayList<User> (users);
         this.orders= new ArrayList<Order>();
         this.requestedProducts= new ArrayList<Request>();
+    }
+
+    public Shop() {
+
     }
 
 
@@ -54,11 +58,11 @@ public class Shop {
     }
 
     /**
-     * This method gets the Shop's wines
+     * This method gets the Shop's products
      *
      * @return the products
      */
-    public HashMap<Product,InventoryItem> getWines(){
+    public HashMap<String, Integer> getProducts(){
         return this.products;
     }
 
@@ -68,7 +72,7 @@ public class Shop {
      * @param products
      */
     public void setProducts(HashMap<Product,InventoryItem> products) {
-        this.products = new HashMap<Product,InventoryItem>(products);
+        this.products = new HashMap<String, Integer>();
     }
 
     /**
@@ -138,18 +142,8 @@ public class Shop {
     }
 
 
-    public ArrayList<Order> getOrdersForUser (User requester) {
-        if(!this.users.contains(requester)) {
-            return null;
-        }
-        ArrayList<Order> orders = new ArrayList<Order>();
-        for (Order tempOrder: this.orders) {
-            if (requester.equals(tempOrder.getOrderer())){
-                orders.add(tempOrder);
-            }
-        }
-        return orders;
-    }
+
+
 
     public boolean isRegistered(String username, String password) {
         for(Person temp : this.users) {
@@ -191,56 +185,26 @@ public class Shop {
     }
 
     /**
-     * This method looks for wines in the DB by their name
-     *
-     * @param authorizer
-     * @param toSearch
-     * @return the results
-     */
-    public HashMap<Product,InventoryItem> findProductsName(Person authorizer, String toSearch){
-        if (!(this.users.contains(authorizer)||this.employees.contains(authorizer))) {
-            return null;
-        }
-        HashMap<Product, InventoryItem> searched = new HashMap<>();
-        for(Map.Entry<Product,InventoryItem> temp : this.products.entrySet()) {
-            if(toSearch.equals(temp.getKey().getName())) {
-                searched.put(temp.getKey(), temp.getValue());
-            }
-        }
-        return searched;
-    }
-
-
-
-
-
-    public void addProduct(Employee authorizer, Product toAdd, Integer code_Product , Integer quantity) {
-        //guardo se authorizer è un employee
-        if(!this.employees.contains(authorizer)) {
-            return;
-        }
-        // We can't use a foreach loop to remove elements, so let's use an iterator instead
-        Iterator<Request> it = this.requestedProducts.iterator();
-        while(it.hasNext()){
-            Request temp = it.next();
-            if (temp.checkIfRequested(toAdd.getName())){
-                it.remove();
+     * This method looks for products by their name
+     * @param name_Product;
+     * @param producer_Product;
+     * @param code_Product;
+     * @param price_Product;
+     * */
+    public void findProductsName(String name_Product , String producer_Product , Integer code_Product , double price_Product) {
+        for (String i : products.keySet()) {
+                if (i == name_Product ) {
+                    System.out.println("Prodotto " + name_Product + "già esistente in " + products);
+                }
+                else {
+                    System.out.println("Prodotto non esistente , Prova ad inserirlo nei prodotti");
+                }
             }
         }
 
-        System.out.println("Prodotto aggiunto con successo: " + toAdd.getName() + " del " + code_Product);
-    }
 
 
 
-    /**
-     * This method orders a new product
-     *
-     * @param orderer
-     * @param wantedProduct
-     * @param code_Product
-     * @param quantity
-     */
 
 
     /**
@@ -249,6 +213,50 @@ public class Shop {
      * @param authorizer
      */
 
+    public void shipProducts (Employee authorizer) {
+        for (Order tempOrder: this.orders){
+                if (!tempOrder.isShipped())
+                {
+                    tempOrder.setShipped(true);
+                    System.out.println("Succesfully shipped product: " + tempOrder.getOrderedProduct().getName());
+                }
+
+                else {
+                    System.out.println("Error with order: "+ tempOrder.getOrderedProduct().getName()+"; Refill the warehouse first.");
+                }
+        }
+    }
+
+
+    /**
+     * This method adds multiple products to the DB
+     *
+     * @param authorizer
+     * @param name_Product
+     * @param quantity
+     */
+    public void addProduct(Employee authorizer, String name_Product, Integer quantity) {
+        //guardo se authorizer è un seller
+        if(!this.employees.contains(authorizer)) {
+            return;
+        }
+        if(this.products.containsValue(name_Product)) {
+            this.products.put( name_Product , quantity);
+        }
+        else {
+            this.products.put(new InventoryItem( 10 , 1));
+        }
+        // We can't use a foreach loop to remove elements, so let's use an iterator instead
+        Iterator<Request> it = this.requestedProducts.iterator();
+        while(it.hasNext()){
+            Request temp = it.next();
+            if (temp.checkIfRequested(getName())){
+                it.remove();
+            }
+        }
+
+        System.out.println("Prodotto aggiunto con successo: " + getName() + " name : " + name_Product );
+    }
 
 
     /**
@@ -258,71 +266,40 @@ public class Shop {
      * @return the orders
      */
 
-
-    /**
-     * This method returns all the shop data in a string
-     *
-     * @param loggedIn
-     * @return the resulting string
-     */
-    public String getShopData(Person loggedIn) {
-        //verify authorizer
-        if(!this.employees.contains(loggedIn)) {
-            return "";
+    public ArrayList<Order> getOrdersForUser (User requester) {
+        if(!this.users.contains(requester)) {
+            return null;
         }
-        String returnedString;
-        returnedString = "Shop: "+this.getName()+"\n";
-        returnedString += "\nUSERS:\n";
-        for (User printingUser: this.getUsers()) {
-            returnedString += printingUser.toString();
-        }
-        returnedString += "\nEMPLOYEES::\n";
-        for (Employee printingAdmin: this.getemployees()) {
-            returnedString += printingAdmin.toString();
-        }
-
-        returnedString += "\nORDERS:\n";
-        for (Order printingOrder: this.getOrders()) {
-            returnedString += printingOrder.toString();
-        }
-        return returnedString;
-    }
-
-    /**
-     * This method adds a new single wine to the database
-     *
-     * @param authorizer
-     * @param toAdd
-     * @param code_Product
-     */
-    public void addProduct(Employee authorizer, Product toAdd, Integer code_Product) {
-        //guardo se authorizer è un seller
-        if(!this.employees.contains(authorizer)) {
-            return;
-        }
-
-        else {
-            this.products.put(toAdd,new InventoryItem(code_Product,Integer.valueOf(1)));
-        }
-        for (Request temp: this.requestedProducts) {
-            if (temp.checkIfRequested(toAdd.getName())){
-                this.requestedProducts.remove(temp);
+        ArrayList<Order> orders = new ArrayList<Order>();
+        for (Order tempOrder: this.orders) {
+            if (requester.equals(tempOrder.getOrderer())){
+                orders.add(tempOrder);
             }
         }
-        System.out.println("Prodotto aggiunto con successo: " + toAdd.getName() + " del " + code_Product);
+        return orders;
     }
 
-    /**
-     * This method returns a string with all the wines in inventory
-     *
-     * @return the string
-     */
-    public String stringAllProducts () {
-        String returnedString = "";
-        returnedString += "PRODUCTS:\n";
-        for (Map.Entry<Product, InventoryItem> productItem: this.getWines().entrySet()) {
-            returnedString += productItem.getKey().toString() + "\n" + productItem.getValue().toString();
-        }
-        return returnedString;
-    }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

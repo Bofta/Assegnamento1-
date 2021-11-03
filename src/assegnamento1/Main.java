@@ -10,36 +10,61 @@ import java.util.HashMap;
 public class Main {
     public static void main(String[] args) {
 
-        Person FirstPerson = new Person();
-        FirstPerson.setUsername("Elon Musk");
-        FirstPerson.setPassword("A unhashable passoword ");
-
-        Employee enrico = new Employee("Enrico", "buonasera");
+        // User(User class) and Admin(Employee) initialization
 
         User alberto = new User("albzan", "nhu345");
         User massimo = new User("maxacqua", "ert675");
         User joe = new User("sleepyJoe","maga2021");
+        User monta = new User("montasser","montapassword");
+
+
 
         ArrayList<User> users = new ArrayList<User>();
         users.add(alberto);
         users.add(massimo);
         users.add(joe);
 
+        Employee enrico = new Employee("Enrico", "buonasera");
         ArrayList<Employee> employee = new ArrayList<Employee> ();
         employee.add(enrico);
 
+        System.out.println(users);
+        System.out.println(employee);
 
-        Product JvD_tastieraRed = new Product("JvD Tastiera Red", "Zagabri Srl", 224, 169.89);
 
-        HashMap<Product,InventoryItem> products = new HashMap<Product, InventoryItem>();
-        products.put(JvD_tastieraRed, new InventoryItem(224,1256));
+        // Products initialization and their data
 
-        Shop store = new Shop(products, employee, users);
-        store.login(massimo.getUsername(),massimo.getPassword());
 
-        System.out.println(store.getShopData(enrico));
-        System.out.println(FirstPerson.username);
-        System.out.println(FirstPerson.password);
+        Product schermo = new Product("Bravia" , "Sony" , 1 , 700.00 , 100);
+        Product mouse = new Product("MX518" ,"Logitech" , 2 , 40.00 , 200 );
+
+        HashMap<Product,InventoryItem> products = new HashMap<Product,InventoryItem>();
+        products.put(schermo, new InventoryItem(1,100));
+        products.put(mouse, new InventoryItem(2,200));
+
+        for (java.util.Map.Entry<Product, InventoryItem> productInventoryItemEntry : products.entrySet()) {
+            System.out.println(productInventoryItemEntry);
+        }
+
+
+
+        // Shop initialization
+
+        Shop shop = new Shop(products , employee , users);
+        shop.login(joe.getUsername() , joe.getPassword());
+        joe.checkLogin(joe.getPassword());
+        joe.orderProduct(mouse , shop, 1 , 10);
+
+        // Verify if registered user in the shop (enrico registered -> True )
+        System.out.println(shop.isRegistered(enrico.username, enrico.password ));
+        // Verify if a non registered user in the shop (monta non registered -> False )
+        System.out.println(shop.isRegistered(monta.username, monta.password ));
+
+        // user order a product and get notified if it has been added succesfuly or not
+        System.out.println(joe.getMyOrders(shop));
+
+
+
 
     }
 }

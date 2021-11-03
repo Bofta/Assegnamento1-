@@ -16,15 +16,22 @@ public class Product {
     private String producer_Product;
     private Integer code_Product;
     private double price_Product;
+    private Integer quantity_Product;
 
     /**
      * This constructor generates an empty Product object
+     * @param bravia
+     * @param sony
+     * @param i
+     * @param v
+     * @param i1
      */
-    public Product() {
+    public Product(String bravia, String sony, int i, double v, int i1) {
         this.name_Product = "";
         this.producer_Product = "";
         this.code_Product = 0;
         this.price_Product = 0;
+        this.quantity_Product = 0;
     }
 
     /**
@@ -34,12 +41,18 @@ public class Product {
      * @param producer_Product
      * @param code_Product
      * @param price_Product
+     * @param quantity_Product
      */
-    public Product(final String name_Product, final String producer_Product, final Integer code_Product , final double price_Product) {
+    public Product(final String name_Product, final String notes_Product, final String producer_Product, final Integer code_Product , final double price_Product , final Integer quantity_Product) {
         this.name_Product = name_Product;
         this.producer_Product = producer_Product;
         this.code_Product = code_Product;
         this.price_Product = price_Product;
+        this.quantity_Product = quantity_Product;
+    }
+
+    public Product() {
+
     }
 
     /**
@@ -47,7 +60,8 @@ public class Product {
      *
      * @return the name
      */
-    public String getName() {
+    public String getName()
+    {
         return this.name_Product;
     }
 
@@ -56,16 +70,19 @@ public class Product {
      *
      * @param name_Product
      */
-    public void setName(final String name_Product) {
+    public void setName(final String name_Product)
+    {
         this.name_Product = name_Product;
     }
+
 
     /**
      * This method gets the products's producer's name
      *
      * @return the notes
      */
-    public String getProducer_Product() {
+    public String getProducer_Product()
+    {
         return this.producer_Product;
     }
 
@@ -74,7 +91,8 @@ public class Product {
      *
      * @param producer_Product
      */
-    public void setProducer_Product(final String producer_Product) {
+    public void setProducer_Product(final String producer_Product)
+    {
         this.producer_Product = producer_Product;
     }
 
@@ -83,7 +101,8 @@ public class Product {
      *
      * @return the product
      */
-    public Integer getCode_Product() {
+    public Integer getCode_Product()
+    {
         return this.code_Product;
     }
 
@@ -92,8 +111,52 @@ public class Product {
      *
      * @param code_Product
      */
-    public void setCode_Product(final Integer code_Product) {
+    public void setCode_Product(final Integer code_Product)
+    {
         this.code_Product = code_Product;
+    }
+
+    /**
+     * This method gets the product's price
+     *
+     * @return the product
+     */
+
+    public double getPrice_Product()
+    {
+        return this.price_Product;
+    }
+
+    /**
+     * This method sets the product's price
+     *
+     * @param price_Product
+     */
+    public void setCode_Product(final double price_Product)
+    {
+        this.price_Product = price_Product;
+    }
+
+
+    /**
+     * This method gets the product's quantity
+     *
+     * @return the product
+     */
+
+    public double getQuantity_Product()
+    {
+        return this.quantity_Product;
+    }
+
+    /**
+     * This method sets the product's quantity
+     *
+     * @param quantity_Product
+     */
+    public void setQuantity_Product(final Integer quantity_Product)
+    {
+        this.quantity_Product = quantity_Product;
     }
 
     /**
@@ -115,6 +178,6 @@ public class Product {
      */
     @Override
     public String toString() {
-        return "----PRODUCT----" + " name='" + getName() + "'\n" + "producer='" + getProducer_Product() + "'\n" + " code='" + getCode_Product() + "'\n" + "\n";
+        return "----PRODUCTS----" + "\n" + " name= " + getName()  + "| producer= " + getProducer_Product()  + "| code= " + getCode_Product()  + "| price='" + getPrice_Product()+ "'" + "| quantity='" + getQuantity_Product() + "'\n" + "\n";
     }
 }

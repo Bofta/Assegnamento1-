@@ -6,8 +6,8 @@ import javafx.beans.property.SimpleIntegerProperty;
 
 
 /**
+ * @author Montasser Ben Rejeb - Omar Stringhini
  * Order describes a product order object.
- *
  */
 
 
@@ -61,7 +61,7 @@ public class Order {
     }
 
     /**
-     * This method sets the user that ordered the wine.
+     * This method sets the user that ordered the product.
      *
      * @param orderer
      */
