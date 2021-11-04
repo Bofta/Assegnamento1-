@@ -1,5 +1,5 @@
 /**
- * @author Montasser Rajeb - Omar Stringhini
+ * @author Montasser Ben Rejeb - Omar Stringhini
  */
 
 package assegnamento1;
