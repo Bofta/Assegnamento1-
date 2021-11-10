@@ -37,24 +37,98 @@ public class AdminDash extends Dash{
             }
             switch (action) {
                 case 1:
-                    System.out.println("Function to ship products");
+                    this.shipProduct();
                 case 2:
-                    System.out.println("2nd option");
+                    this.addNewProduct();
                     break;
                 case 3:
                     System.out.println("3rd option");
                     break;
                 case 4:
-                    System.out.println("Manca una funzione per stampare i dati del shop");
+                    this.shop.stringAllProducts();
                     break;
             }
         } while (!action.equals(0));
     }
 
+    /**
+     * UI to ship the ordered products.
+     *
+     */
+    private void shipProduct(){
+        System.out.println("Shipping Products!");
+        new Employee(this.loggedIn).shipOrders(this.shop);
+        System.out.println("Finished shipping orders.");
+    }
 
 
+        private void addNewProduct() {
+            System.out.print("Insert name: ");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+            String input = "";
+            try {
+                input = reader.readLine();
+            } catch (IOException exc) {
+                System.out.println("IOEXception thrown. Exiting now.");
+                return;
+            }
+            String name = input;
 
+            System.out.println("Insert producer: ");
+            try {
+                input = reader.readLine();
+            } catch (IOException exc) {
+                System.out.println("IOEXception thrown. Exiting now.");
+                return;
+            }
+            String producer = input;
 
+            System.out.println("Insert quantity: ");
+            try {
+                input = reader.readLine();
+            } catch (IOException exc) {
+                System.out.println("IOEXception thrown. Exiting now.");
+                return;
+            }
+            Integer quantity;
+            try{
+                quantity = Integer.valueOf(input);
+            } catch (NumberFormatException nfex) {
+                System.out.println("Wrong value inserted.");
+                return;
+            }
+            System.out.println("Insert price: ");
+            try {
+                input = reader.readLine();
+            } catch (IOException exc) {
+                System.out.println("IOEXception thrown. Exiting now.");
+                return;
+            }
+            double price;
+            try{
+                price = Integer.valueOf(input);
+            } catch (NumberFormatException nfex) {
+                System.out.println("Wrong value inserted.");
+                return;
+            }
+
+            System.out.println("Insert code: ");
+            try {
+                input = reader.readLine();
+            } catch (IOException exc) {
+                System.out.println("IOEXception thrown. Exiting now.");
+                return;
+            }
+            Integer code;
+            try{
+                code = Integer.valueOf(input);
+            } catch (NumberFormatException nfex) {
+                System.out.println("Wrong value inserted.");
+                return;
+            }
+
+            this.shop.addProduct(new Employee(this.loggedIn),name, quantity);
+        }
 
 
 

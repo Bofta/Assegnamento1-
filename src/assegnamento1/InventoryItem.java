@@ -13,7 +13,7 @@ import java.util.Map;
  */
 public class InventoryItem {
 
-    public HashMap<Integer,Integer> code_Product;
+    public HashMap<Integer,Integer> code_Product , quantity;
 
 
 
@@ -54,7 +54,7 @@ public class InventoryItem {
      * @return the quantity
      */
     public Integer getQuantityForcode_Product(final Integer code_Product) {
-        return this.code_Product.get(code_Product);
+        return this.code_Product.get(quantity);
     }
 
     /**

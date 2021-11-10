@@ -112,7 +112,7 @@ public class Shop {
     }
 
     /**
-     * This method gets the Shop's requested wines
+     * This method gets the Shop's requested products
      *
      * @return the requests
      */
@@ -185,29 +185,6 @@ public class Shop {
     }
 
     /**
-     * This method looks for products by their name
-     * @param name_Product;
-     * @param producer_Product;
-     * @param code_Product;
-     * @param price_Product;
-     * */
-    public void findProductsName(String name_Product , String producer_Product , Integer code_Product , double price_Product) {
-        for (String i : products.keySet()) {
-                if (i == name_Product ) {
-                    System.out.println("Prodotto " + name_Product + "già esistente in " + products);
-                }
-                else {
-                    System.out.println("Prodotto non esistente , Prova ad inserirlo nei prodotti");
-                }
-            }
-        }
-
-
-
-
-
-
-    /**
      * This method ships the ordered products
      *
      * @param authorizer
@@ -227,9 +204,8 @@ public class Shop {
         }
     }
 
-
     /**
-     * This method adds multiple products to the DB
+     * This method adds multiple products
      *
      * @param authorizer
      * @param name_Product
@@ -253,9 +229,8 @@ public class Shop {
             }
         }
 
-        System.out.println("Prodotto aggiunto con successo: " + getName() + " name : " + name_Product );
+        System.out.println("Prodotto "+ name_Product +" aggiunto con successo  da " + authorizer.getUsername());
     }
-
 
     /**
      * This method returns the orders a user has made
@@ -276,6 +251,55 @@ public class Shop {
         }
         return orders;
     }
+
+    /**
+     * This method looks for products by their name
+     * @param loggedIn
+     * @param input_name_product ;
+     * @return*/
+    public HashMap<Product, InventoryItem> findProductsName(Person loggedIn, String input_name_product) {
+        for (String p_name_iterator : products.keySet()) {
+            if (p_name_iterator == input_name_product ) {
+                System.out.println("Prodotto :" + input_name_product +" già esistente in products list");
+            }
+            else {
+                System.out.println("Prodotto non esistente nel product list");
+            }
+        }
+        return null;
+    }
+
+    /**
+     * This method looks for products by their code
+     * @param input_code_prooduct;
+     * */
+
+    public void findProductsCode(String input_code_prooduct) {
+        for (String p_name_iterator : products.keySet()) {
+            if (p_name_iterator == input_code_prooduct ) {
+                System.out.println("Prodotto :" + input_code_prooduct +" già esistente in products list");
+            }
+            else {
+                System.out.println("Prodotto non esistente nel product list");
+            }
+        }
+    }
+
+    /**
+     * This method returns a string with all the products in inventory
+     *
+     * @return the string
+     */
+    public String stringAllProducts() {
+        String returnedString = "";
+        returnedString += "Products:\n";
+        for (Map.Entry<String, Integer> productItem: this.getProducts().entrySet()) {
+            returnedString += productItem.getKey().toString() + "\n" + productItem.getValue().toString();
+        }
+        return returnedString;
+    }
+
+
 
 }
 

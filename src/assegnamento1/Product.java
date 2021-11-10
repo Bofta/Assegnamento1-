@@ -18,21 +18,7 @@ public class Product {
     private double price_Product;
     private Integer quantity_Product;
 
-    /**
-     * This constructor generates an empty Product object
-     * @param bravia
-     * @param sony
-     * @param i
-     * @param v
-     * @param i1
-     */
-    public Product(String bravia, String sony, int i, double v, int i1) {
-        this.name_Product = "";
-        this.producer_Product = "";
-        this.code_Product = 0;
-        this.price_Product = 0;
-        this.quantity_Product = 0;
-    }
+
 
     /**
      * This constructor generates a Product object by its properties
@@ -43,7 +29,7 @@ public class Product {
      * @param price_Product
      * @param quantity_Product
      */
-    public Product(final String name_Product, final String notes_Product, final String producer_Product, final Integer code_Product , final double price_Product , final Integer quantity_Product) {
+    public Product(final String name_Product, final String producer_Product, final Integer code_Product , final double price_Product , final Integer quantity_Product) {
         this.name_Product = name_Product;
         this.producer_Product = producer_Product;
         this.code_Product = code_Product;

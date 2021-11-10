@@ -4,9 +4,8 @@
 
 package assegnamento1;
 
-
-import javax.swing.text.html.HTMLDocument;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 
 /**
@@ -81,9 +80,13 @@ import java.util.Iterator;
         }
 
 
-        public ArrayList<Product> searchProduct (String research){
 
-            Iterator<Product> it = InventoryItem.
+        public void searchProduct (String research){
+            HashMap<Product,InventoryItem> products = new HashMap<Product,InventoryItem>();
+            Iterator<Product> it = products.keySet().iterator();
+            while(it.hasNext()) {
+                System.out.println(it.next());
+            }
 
 
         }

@@ -15,7 +15,7 @@ public class Main {
         User alberto = new User("albzan", "nhu345");
         User massimo = new User("maxacqua", "ert675");
         User joe = new User("sleepyJoe","maga2021");
-        User monta = new User("montasser","montapassword");
+        Employee monta = new Employee("montasser","montapassword");
 
 
 
@@ -61,7 +61,22 @@ public class Main {
         System.out.println(shop.isRegistered(monta.username, monta.password ));
 
         // user order a product and get notified if it has been added succesfuly or not
-        System.out.println(joe.getMyOrders(shop));
+        shop.orderProduct(joe , schermo , 1 , 10);
+        System.out.println("Orders : " + joe.getMyOrders(shop));
+        joe.searchProduct("MX518");
+
+        shop.addProduct(enrico,"MX518" , 1);
+        System.out.println(shop.stringAllProducts());
+
+        shop.stringAllProducts();
+
+
+        AdminDash monta_dash_admin = new AdminDash(monta , shop);
+        monta_dash_admin.mainMenu();
+
+        products.toString();
+
+
 
 
 
