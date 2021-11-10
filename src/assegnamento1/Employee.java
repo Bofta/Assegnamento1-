@@ -16,7 +16,7 @@ public class Employee extends Person{
         super();
     }
     /**
-     * This constructor generates a employee from its username and password.
+     * This constructor generates an employee from its username and password.
      *
      * @param username
      * @param password
@@ -49,8 +49,8 @@ public class Employee extends Person{
      * @param quantity
      * @param shop
      */
-    public void addProducts(Product newProduct, Integer quantity, Shop shop) {
-        shop.addProduct(newProduct, quantity);
+    public void addProducts(String newProduct, Integer quantity, Shop shop) {
+        shop.addProduct(this,newProduct, quantity);
     }
 
 

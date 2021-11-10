@@ -53,7 +53,7 @@ public class Main {
         Shop shop = new Shop(products , employee , users);
         shop.login(joe.getUsername() , joe.getPassword());
         joe.checkLogin(joe.getPassword());
-        joe.orderProduct(mouse , shop, 1 , 10);
+        joe.orderProduct(mouse , shop, 2 , 10);
 
         // Verify if registered user in the shop (enrico registered -> True )
         System.out.println(shop.isRegistered(enrico.username, enrico.password ));

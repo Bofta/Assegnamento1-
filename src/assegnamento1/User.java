@@ -5,9 +5,11 @@
 package assegnamento1;
 
 
+import javax.swing.text.html.HTMLDocument;
 import java.util.ArrayList;
+import java.util.Iterator;
 
-    /**
+/**
      * @author Montasser Ben Rejeb - Omar Stringhini
      * User is a simple user that can buy products from the shop.
      */
@@ -67,8 +69,7 @@ import java.util.ArrayList;
         }
 
 
-
-        /*
+        /**
          * This method adds a product to the list of request
          *
          * @param requestedProduct
@@ -77,6 +78,14 @@ import java.util.ArrayList;
         public void requestProduct (String requestedProduct, Shop shop) {
             shop.requestProduct(this, requestedProduct);
             return;
+        }
+
+
+        public ArrayList<Product> searchProduct (String research){
+
+            Iterator<Product> it = InventoryItem.
+
+
         }
     }
 

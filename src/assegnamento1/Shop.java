@@ -243,9 +243,7 @@ public class Shop {
         if(this.products.containsValue(name_Product)) {
             this.products.put( name_Product , quantity);
         }
-        else {
-            this.products.put(new InventoryItem( 10 , 1));
-        }
+
         // We can't use a foreach loop to remove elements, so let's use an iterator instead
         Iterator<Request> it = this.requestedProducts.iterator();
         while(it.hasNext()){
@@ -278,7 +276,6 @@ public class Shop {
         }
         return orders;
     }
-
 
 }
 
